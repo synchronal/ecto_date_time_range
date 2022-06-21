@@ -16,5 +16,6 @@ if config_env() == :test do
   config :ecto_date_time_range,
     ecto_repos: [Test.Repo]
 
+  config :elixir, :time_zone_database, Tz.TimeZoneDatabase
   config :logger, level: :info
 end

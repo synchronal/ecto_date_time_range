@@ -39,7 +39,8 @@ defmodule EctoDateTimeRange.MixProject do
       {:ecto, ">= 3.0.0"},
       {:ecto_sql, "> 3.0.0"},
       {:ecto_temp, "~> 0.1", only: :test},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:tz, "~> 0.20.1", optional: true}
     ]
 
   defp dialyzer,
