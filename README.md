@@ -11,3 +11,8 @@ def deps do
   ]
 end
 ```
+
+## Alternatives you might like
+
+- [pg_ranges](https://hex.pm/packages/pg_ranges)
+
