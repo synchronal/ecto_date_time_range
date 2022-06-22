@@ -26,6 +26,8 @@ defmodule Ecto.UTCDateTimeRange do
           end_at: DateTime.t()
         }
 
+  # # #
+
   @doc """
   Create an `Ecto.UTCDateTimeRange` from two ISO8601 strings.
 
@@ -81,10 +83,16 @@ defmodule Ecto.UTCDateTimeRange do
 
   defp do_parse(_), do: {:error, "Unable to parse DateTime(s) from input"}
 
+  # # # Ecto.Type callbacks
+
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Declares the native type that will be used in the database."
   def type, do: :tstzrange
 
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Converts user-provided data (for example from a form) to the Elixir term."
   def cast(%{start_at: lower, end_at: upper, tz: tz}) do
     case apply_func({lower, upper}, &Ecto.Type.cast(:naive_datetime, &1)) do
       {:ok, {lower, upper}} ->
@@ -109,6 +117,8 @@ defmodule Ecto.UTCDateTimeRange do
   def cast(_), do: {:error, message: "unable to read start and/or end times"}
 
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Converts the Ecto native type to the Elixir term."
   def load(%Postgrex.Range{lower: lower, upper: upper}) do
     apply_func({lower, upper}, &Ecto.Type.load(:utc_datetime, &1))
     |> case do
@@ -123,6 +133,8 @@ defmodule Ecto.UTCDateTimeRange do
   def load(_), do: :error
 
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Converts the Elixir term to the Ecto native type."
   def dump(%__MODULE__{start_at: %DateTime{} = lower, end_at: %DateTime{} = upper}) do
     {:ok, %Postgrex.Range{lower: lower, upper: upper, upper_inclusive: false}}
   end
@@ -138,6 +150,8 @@ defmodule Ecto.UTCDateTimeRange do
   def dump(_), do: :error
 
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Checks if two terms are equal."
   def equal?(%__MODULE__{start_at: lower1, end_at: upper1}, %__MODULE__{
         start_at: lower2,
         end_at: upper2
@@ -147,7 +161,11 @@ defmodule Ecto.UTCDateTimeRange do
   def equal?(first, second), do: first == second
 
   @impl Ecto.Type
+  @doc section: :ecto_type
+  @doc "Declares than when used in embedded schemas, the type will be dumped before being encoded."
   def embed_as(_), do: :dump
+
+  # # # Access
 
   @impl Access
   def fetch(map, key), do: :maps.find(key, map)
@@ -157,6 +175,8 @@ defmodule Ecto.UTCDateTimeRange do
 
   @impl Access
   def pop(data, key), do: {Map.get(data, key), data}
+
+  # # # Private
 
   defp apply_func({lower, upper}, fun) do
     lower = do_apply_func(lower, fun)
