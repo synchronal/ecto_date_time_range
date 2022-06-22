@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -u
+set -o pipefail
+
+trap "exit" INT
+
+source ".medic/_support/doctor.sh"
+
+check "Check formatting" "bin/dev/format --check" "bin/dev/format --all"
+step "Auditing Elixir deps" "mix deps.audit"
+step "Credo" "mix credo --strict"
+step "Dialyzer" "mix dialyzer"
+check "Checking for unused deps" "mix deps.unlock --check-unused" "mix deps.clean --unused --unlock"
