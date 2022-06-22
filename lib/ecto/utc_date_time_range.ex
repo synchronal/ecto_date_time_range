@@ -122,4 +122,3 @@ defmodule Ecto.UTCDateTimeRange do
   defp utc(%NaiveDateTime{} = time, tz),
     do: DateTime.from_naive!(time, tz) |> DateTime.shift_zone!("Etc/UTC")
 end
-

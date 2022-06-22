@@ -15,6 +15,7 @@ defmodule EctoDateTimeRange.MixProject do
       deps: deps(),
       description: "Ecto type for PostgreSQL's tstzrange",
       dialyzer: dialyzer(),
+      docs: docs(),
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       homepage_url: @scm_url,
@@ -39,6 +40,8 @@ defmodule EctoDateTimeRange.MixProject do
       {:ecto, ">= 3.0.0"},
       {:ecto_sql, "> 3.0.0"},
       {:ecto_temp, "~> 0.1", only: :test},
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
+      {:markdown_formatter, "~> 0.2.0", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0"},
       {:tz, "~> 0.20.1", optional: true}
     ]
@@ -48,6 +51,19 @@ defmodule EctoDateTimeRange.MixProject do
       plt_add_apps: [:ex_unit, :inets, :mix],
       plt_add_deps: :app_tree,
       plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+    ]
+
+  defp docs,
+    do: [
+      extra_section: "Guides",
+      extras: [
+        "guides/installation.md",
+        "guides/migrations.md",
+        "guides/forms.md",
+        "LICENSE.md"
+      ],
+      main: "installation",
+      source_ref: "main"
     ]
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
