@@ -8,9 +8,17 @@ defmodule Ecto.UTCDateTimeRange do
   ```
   defmodule Core.Thing do
     use Ecto.Schema
+    import Ecto.Changeset
 
     schema "things" do
       field :performed_during, Ecto.UTCDateTimeRange
+    end
+
+    @required_attrs ~w[performed_during]a
+    def changeset(data \\ %__MODULE__{}, attrs) do
+      data
+      |> cast(attrs, @required_attrs)
+      |> validate_required(@required_attrs)
     end
   end
   ```

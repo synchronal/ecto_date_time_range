@@ -58,15 +58,16 @@ defmodule EctoDateTimeRange.MixProject do
     do: [
       extra_section: "Guides",
       extras: [
-        "guides/installation.md",
+        "guides/overview.md",
         "guides/migrations.md",
         "guides/forms.md",
+        "CHANGELOG.md",
         "LICENSE.md"
       ],
       groups_for_functions: [
         "Ecto.Type Callbacks": &(&1[:section] == :ecto_type)
       ],
-      main: "installation",
+      main: "overview",
       source_ref: "main"
     ]
 
@@ -83,7 +84,10 @@ defmodule EctoDateTimeRange.MixProject do
         mix.exs
       ],
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => @scm_url},
+      links: %{
+        "GitHub" => @scm_url,
+        "Change Log" => "https://hexdocs.pm/ecto_date_time_range/changelog.html"
+      },
       maintainers: ["synchronal.dev", "Erik Hanson", "Eric Saxby"]
     ]
 end
