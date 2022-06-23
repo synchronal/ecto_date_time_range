@@ -2,8 +2,6 @@ defmodule Ecto.UTCDateTimeRangeTest do
   # @related [subject](/lib/ecto/utc_date_time_range.ex)
   @moduledoc false
   use Test.DataCase, async: true
-  use EctoTemp, repo: Test.Repo
-
   alias Ecto.UTCDateTimeRange
 
   doctest Ecto.UTCDateTimeRange
@@ -14,7 +12,6 @@ defmodule Ecto.UTCDateTimeRangeTest do
 
   setup do
     create_temp_tables()
-
     :ok
   end
 

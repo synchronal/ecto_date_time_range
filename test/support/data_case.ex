@@ -8,6 +8,7 @@ defmodule Test.DataCase do
 
   using do
     quote do
+      use EctoTemp, repo: Test.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query

@@ -94,8 +94,8 @@ params will arrive in the following format, which matches that expected by
 %{
   "thing" => %{
     "performed_during" => %{
-        "start_at" => "2022-06-22T01:00:00Z",
-        "end_at" => "2022-06-22T01:00:00Z",
+        "start_at" => "2022-06-22 01:00:00",
+        "end_at" => "2022-06-22 01:00:00",
         "tz" => "Etc/UTC"
       }
   }
