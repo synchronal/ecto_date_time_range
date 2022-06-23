@@ -49,4 +49,8 @@ defmodule Test.DataCase do
       end)
     end)
   end
+
+  @doc "Retrieve test identifiers from a list of Ecto schemas."
+  @spec tids([Ecto.Schema.t()]) :: [binary()]
+  def tids(schemas) when is_list(schemas), do: Enum.map(schemas, & &1.tid)
 end

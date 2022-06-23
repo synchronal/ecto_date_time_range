@@ -1,5 +1,7 @@
 # Change Log
 
+- Add `Ecto.RangeOperators.contains/2` macro.
+
 ## 0.1.1
 
 - Update docs regarding setup, form data.

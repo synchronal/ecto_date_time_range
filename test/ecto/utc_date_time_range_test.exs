@@ -8,6 +8,7 @@ defmodule Ecto.UTCDateTimeRangeTest do
 
   deftemptable :things_with_time_ranges do
     column(:during, :tstzrange)
+    column(:tid, :string)
   end
 
   setup do
@@ -21,6 +22,7 @@ defmodule Ecto.UTCDateTimeRangeTest do
 
     schema "things_with_time_ranges_temp" do
       field(:during, UTCDateTimeRange)
+      field(:tid, :string)
     end
 
     def changeset(struct \\ %__MODULE__{}, attrs),
@@ -148,6 +150,24 @@ defmodule Ecto.UTCDateTimeRangeTest do
                |> Test.Repo.insert()
 
       assert %{during: ["end time must be later than start time"]} = errors_on(changeset)
+    end
+
+    test "accepts a UTCDateTimeRange struct" do
+      assert {:ok, thing} =
+               Thing.changeset(%{
+                 during: %UTCDateTimeRange{
+                   start_at: ~U[2020-02-02 13:00:00Z],
+                   end_at: ~U[2020-02-02 14:00:00Z]
+                 }
+               })
+               |> Test.Repo.insert()
+
+      Test.Repo.get(Thing, thing.id)
+      |> Map.get(:during)
+      |> assert_eq(%UTCDateTimeRange{
+        start_at: ~U[2020-02-02 13:00:00Z],
+        end_at: ~U[2020-02-02 14:00:00Z]
+      })
     end
   end
 
