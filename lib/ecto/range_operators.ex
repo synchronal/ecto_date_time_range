@@ -11,7 +11,7 @@ defmodule Ecto.RangeOperators do
   import Ecto.RangeOperators
 
   now = DateTime.utc_now()
-  from(thing in Thing, where: thing.during contains ^now)
+  from(thing in Thing, where: contains(thing.during, ^now))
   ```
   """
 
