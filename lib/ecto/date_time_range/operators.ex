@@ -1,5 +1,5 @@
-defmodule Ecto.RangeOperators do
-  # @related [test](/test/ecto/range_operators_test.exs)
+defmodule Ecto.DateTimeRange.Operators do
+  # @related [test](/test/ecto/date_time_range/operators_test.exs)
 
   @moduledoc """
   Provides operators for querying against ranges in PostgreSQL.
@@ -8,7 +8,7 @@ defmodule Ecto.RangeOperators do
 
   ```
   import Ecto.Query
-  import Ecto.RangeOperators
+  import Ecto.DateTimeRange.Operators
 
   now = DateTime.utc_now()
   from(thing in Thing, where: contains(thing.during, ^now))
