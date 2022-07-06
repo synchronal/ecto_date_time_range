@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.0
+
+- Move `~t` to `Ecto.DateTimeRange`.
+- Add `Ecto.UTCTimeRange` type.
 - Add `Ecto.RangeOperators.contains/2` macro.
 
 ## 0.1.1
