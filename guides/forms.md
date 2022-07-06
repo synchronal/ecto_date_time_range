@@ -12,41 +12,91 @@ defmodule Web.Components do
   def utc_date_time_range_field(assigns) do
     ~H"""
     <fieldset>
-      <%= label @f, @field do %>
-        <div is="grouped">
-          <span><%= @title %></span>
-          <%= error_tag @f, @field %>
-        </div>
-        <%= content_tag(:input, nil,
-              type: "text"
-              name: "#{form_name(@f)}[#{@field}][start_at]",
-              value: utc_date_time_part(@f, @field, :start_at),
-              id: "#{form.name}_#{field.name}_start_at") %>
-
-        <%= content_tag(:input, nil,
-              type: "text",
-              name: "#{form_name(@f)}[#{@field}][end_at]",
-              value: utc_date_time_part(@f, @field, :end_at),
-              id: "#{form.name}_#{field.name}_end_at") %>
-
-        <%= content_tag(:input, nil,
-              type: "hidden",
-              name: "#{form_name(@f)}[#{@field}][tz]",
-              value: "Etc/UTC") %>
-      <% end %>
+      <%= error_tag @f, @field %>
+      <input
+        type="datetime-local"
+        name={"#{form_name(@f)}[#{@field}][start_at]"}
+        value={utc_date_time_part(@f, @field, :start_at)}
+        id={"#{form_name(@f)}_#{@field}_start_at"}
+      />
+      <input
+        type="datetime-local"
+        name={"#{form_name(@f)}[#{@field}][end_at]"}
+        value={utc_date_time_part(@f, @field, :end_at)}
+        id={"#{form_name(@f)}_#{@field}_end_at"}
+      />
+      <input
+        type="hidden"
+        name={"#{form_name(@f)}[#{@field}][tz]"}
+        value="America/Los_Angeles"
+        id={"#{form_name(@f)}_#{@field}_tz"}
+      />
     </fieldset>
     """
+  end
+
+  def utc_time_range_field(assigns) do
+  ~H"""
+  <fieldset id={@field}>
+    <div is="grouped">
+      <%= error_tag @f, @field %>
+      <input
+        type="time"
+        name={"#{form_name(@f)}[#{@field}][start_at]"}
+        value={utc_time_part(@f, @field, :start_at)}
+        id={"#{form_name(@f)}_#{@field}_start_at"}
+      />
+      <input
+        type="time"
+        name={"#{form_name(@f)}[#{@field}][end_at]"}
+        value={utc_time_part(@f, @field, :end_at)}
+        id={"#{form_name(@f)}_#{@field}_end_at"}
+      />
+      <input
+        type="hidden"
+        name={"#{form_name(@f)}[#{@field}][tz]"}
+        value="America/Los_Angeles"
+        id={"#{form_name(@f)}_#{@field}_tz"}
+      />
+    </div>
+  </fieldset>
+  """
   end
 
   defp form_name(form), do: form.name
 
   defp utc_date_time_part(form, field, part) do
     form.source
-    |> Ecto.Changeset.get_field(name)
+    |> Ecto.Changeset.get_field(field)
     |> case do
       nil -> DateTime.utc_now()
-      %Ecto.UTCDateTimeRange{} = range -> Map.get(range, field)
+      %Ecto.UTCDateTimeRange{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
     end
+  end
+
+  defp utc_time_part(form, field, part) do
+    form.source
+    |> Ecto.Changeset.get_field(field)
+    |> case do
+      nil -> default_time(part)
+      %Ecto.UTCTimeRange{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
+    end
+    |> to_time_value()
+  end
+
+  defp default_time(:start_at), do: ~T[06:00:00]
+  defp default_time(:end_at), do: ~T[18:00:00]
+
+  defp to_time_value(%Time{} = time), do: Calendar.strftime(time, "%H:%M")
+
+  defp to_time_zone(%Time{} = time, tz), do: Time.add(time, tz_offset(tz), :second)
+  defp to_time_zone(%DateTime{} = time, tz), do: DateTime.add(time, tz_offset(tz), :second)
+
+  defp tz_offset(tz) do
+    {:ok, %{std_offset: _, utc_offset: offset, zone_abbr: _}} =
+      Calendar.get_time_zone_database().time_zone_periods_from_wall_datetime(NaiveDateTime.utc_now(), tz)
+
+    offset
   end
 end
 ```
@@ -62,7 +112,7 @@ defmodule Web.MyLiveView do
   def render(assigns) do
     ~H"""
     <.form let={f} for={@changeset} id="thing-form" phx-change="validate">
-      <.utc_date_time_range_field id="performed-during" f={f} field={:performed_during} title="Performed During" />
+      <.utc_date_time_range_field id="performed-during" f={f} field={:performed_during} />
       <%= submit("Save") %>
     </.form>
     """
