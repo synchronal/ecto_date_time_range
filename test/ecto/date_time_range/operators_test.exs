@@ -4,7 +4,7 @@ defmodule Ecto.DateTimeRange.OperatorsTest do
   use Test.DataCase, async: true
   import Ecto.DateTimeRange.Operators
   import Ecto.Query
-  import Ecto.UTCDateTimeRange, only: [sigil_t: 2]
+  import Ecto.DateTimeRange, only: [sigil_t: 2]
   alias Ecto.UTCDateTimeRange
 
   doctest Ecto.DateTimeRange.Operators
@@ -34,9 +34,9 @@ defmodule Ecto.DateTimeRange.OperatorsTest do
 
   describe "contains" do
     setup do
-      Thing.changeset(%{during: ~t{2020-02-02T13:00:00Z - 2020-02-02T14:00:00Z}, tid: "early"}) |> Test.Repo.insert()
-      Thing.changeset(%{during: ~t{2020-02-02T14:30:00Z - 2020-02-02T15:00:00Z}, tid: "middle"}) |> Test.Repo.insert()
-      Thing.changeset(%{during: ~t{2020-02-02T15:00:00Z - 2020-02-02T15:30:00Z}, tid: "later"}) |> Test.Repo.insert()
+      Thing.changeset(%{during: ~t{2020-02-02T13:00:00Z..2020-02-02T14:00:00Z}, tid: "early"}) |> Test.Repo.insert()
+      Thing.changeset(%{during: ~t{2020-02-02T14:30:00Z..2020-02-02T15:00:00Z}, tid: "middle"}) |> Test.Repo.insert()
+      Thing.changeset(%{during: ~t{2020-02-02T15:00:00Z..2020-02-02T15:30:00Z}, tid: "later"}) |> Test.Repo.insert()
       :ok
     end
 

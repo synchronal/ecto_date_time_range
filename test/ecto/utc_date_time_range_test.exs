@@ -170,38 +170,4 @@ defmodule Ecto.UTCDateTimeRangeTest do
       })
     end
   end
-
-  describe "sigil_t" do
-    import Ecto.UTCDateTimeRange, only: [sigil_t: 2]
-
-    test "creates a date time range from two ISO8601 timestamps" do
-      ~t{2020-02-02T00:01:00Z - 2020-02-02T00:01:01Z}
-      |> assert_eq(%UTCDateTimeRange{
-        start_at: ~U[2020-02-02 00:01:00Z],
-        end_at: ~U[2020-02-02 00:01:01Z]
-      })
-    end
-
-    test "can be given an ?r modifier" do
-      ~t{2020-02-02T00:01:00Z - 2020-02-02T00:01:01Z}r
-      |> assert_eq(%UTCDateTimeRange{
-        start_at: ~U[2020-02-02 00:01:00Z],
-        end_at: ~U[2020-02-02 00:01:01Z]
-      })
-    end
-
-    test "raises an ArgumentError when not given two timestamps" do
-      assert_raise ArgumentError, fn ->
-        ~t{2020-02-02T00:01:00Z - derp}
-      end
-
-      assert_raise ArgumentError, fn ->
-        ~t{blerp - 2020-02-02T00:01:00Z}
-      end
-
-      assert_raise ArgumentError, fn ->
-        ~t{some junk}
-      end
-    end
-  end
 end

@@ -42,44 +42,15 @@ defmodule Ecto.UTCDateTimeRange do
   ## Example
 
   ```
-  iex> import Ecto.UTCDateTimeRange, only: [sigil_t: 2]
-  iex> ~t(2020-02-02T00:01:00Z - 2020-02-02T00:01:01Z)
-  %Ecto.UTCDateTimeRange{start_at: ~U[2020-02-02T00:01:00Z], end_at: ~U[2020-02-02T00:01:01Z]}
-  ...>
-  iex> ~t(hi there)
-  ** (ArgumentError) Unable to parse DateTime(s) from input
-  ```
-  """
-  @spec sigil_t(binary(), list()) :: t() | no_return()
-  def sigil_t(string, []) when is_binary(string) do
-    case parse(string) do
-      {:ok, range} -> range
-      {:error, error} -> raise ArgumentError, error
-    end
-  end
-
-  def sigil_t(string, [?r]) when is_binary(string) do
-    case parse(string) do
-      {:ok, range} -> range
-      {:error, error} -> raise ArgumentError, error
-    end
-  end
-
-  @doc """
-  Create an `Ecto.UTCDateTimeRange` from two ISO8601 strings.
-
-  ## Example
-
-  ```
-  iex> Ecto.UTCDateTimeRange.parse("2020-02-02T00:01:00Z - 2020-02-02T00:01:01Z")
+  iex> Ecto.UTCDateTimeRange.parse("2020-02-02T00:01:00Z..2020-02-02T00:01:01Z")
   {:ok, %Ecto.UTCDateTimeRange{start_at: ~U[2020-02-02T00:01:00Z], end_at: ~U[2020-02-02T00:01:01Z]}}
 
-  iex> Ecto.UTCDateTimeRange.parse("2020-02-02T00:01:00Z - later")
+  iex> Ecto.UTCDateTimeRange.parse("2020-02-02T00:01:00Z..later")
   {:error, "Unable to parse DateTime(s) from input"}
   ```
   """
   @spec parse(binary()) :: {:ok, t()} | {:error, term()}
-  def parse(string) when is_binary(string), do: string |> String.split(~r{ \- }) |> do_parse()
+  def parse(string) when is_binary(string), do: string |> String.split("..") |> do_parse()
 
   defp do_parse([%DateTime{} = lower, %DateTime{} = upper]),
     do: {:ok, %__MODULE__{start_at: lower, end_at: upper}}
