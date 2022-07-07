@@ -37,6 +37,30 @@ defmodule Ecto.UTCTimeRange do
   # # #
 
   @doc """
+  Returns true or false depending on whether the time is falls within the
+  specified range.
+
+  ## Example
+
+  ```
+  iex> import Ecto.DateTimeRange
+  ...>
+  iex> Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[00:00:00])
+  false
+  iex> Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[01:00:00])
+  true
+  iex> Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[01:59:59])
+  true
+  iex> Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[02:00:00])
+  false
+  ```
+  """
+  @spec contains?(t(), Time.t()) :: boolean()
+  def contains?(%__MODULE__{start_at: start_at, end_at: end_at}, %Time{} = time) do
+    Time.compare(start_at, time) in [:eq, :lt] && Time.compare(end_at, time) == :gt
+  end
+
+  @doc """
   Create an `Ecto.UTCDateTimeRange` from two ISO8601 strings.
 
   ## Example

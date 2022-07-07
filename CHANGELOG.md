@@ -1,5 +1,7 @@
 # Change Log
 
+- Add `Ecto.UTCTimeRange.contains?/2`.
+
 ## 0.2.0
 
 - Move `~t` to `Ecto.DateTimeRange`.
