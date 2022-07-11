@@ -1,5 +1,7 @@
 # Change Log
 
+## 0.3.1
+
 - Fix `Ecto.UTCTimeRange.contains?/2` to handle ranges crossing day barrier.
 
 ## 0.3.0
