@@ -203,4 +203,33 @@ defmodule Ecto.UTCTimeRangeTest do
       })
     end
   end
+
+  describe "contains?" do
+    import Ecto.DateTimeRange
+    test "with time inside range", do: assert(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[01:59:59]))
+    test "with time before range", do: refute(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[00:00:00]))
+    test "with time after range", do: refute(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[03:00:00]))
+    test "with time at start", do: assert(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[01:00:00]))
+    test "with time at end", do: refute(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[02:00:00]))
+
+    test "with time inside cross-day range",
+      do: assert(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[01:00:00]))
+
+    test "with time before cross-day range",
+      do: refute(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[22:59:59]))
+
+    test "with time after cross-day range",
+      do: refute(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[02:01:00]))
+
+    test "with time at start of cross-day range",
+      do: assert(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[23:00:00]))
+
+    test "with time at end of cross-day range",
+      do: refute(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[02:00:00]))
+
+    test "with midnight inside range", do: refute(Ecto.UTCTimeRange.contains?(~t[01:00:00..02:00:00]T, ~T[00:00:00]))
+
+    test "with midnight inside cross-day range",
+      do: assert(Ecto.UTCTimeRange.contains?(~t[23:00:00..02:00:00]T, ~T[00:00:00]))
+  end
 end

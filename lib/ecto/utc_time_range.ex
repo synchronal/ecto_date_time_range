@@ -57,7 +57,11 @@ defmodule Ecto.UTCTimeRange do
   """
   @spec contains?(t(), Time.t()) :: boolean()
   def contains?(%__MODULE__{start_at: start_at, end_at: end_at}, %Time{} = time) do
-    Time.compare(start_at, time) in [:eq, :lt] && Time.compare(end_at, time) == :gt
+    if Time.compare(start_at, end_at) == :lt do
+      Time.compare(start_at, time) in [:eq, :lt] && Time.compare(end_at, time) == :gt
+    else
+      Time.compare(start_at, time) in [:eq, :lt] || Time.compare(end_at, time) == :gt
+    end
   end
 
   @doc """
