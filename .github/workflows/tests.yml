@@ -38,7 +38,8 @@ jobs:
         run: mix deps.get
         working-directory: .
       - name: Compile for test
-        run: mix compile --force --warnings-as-errors
+        # run: mix compile --force --warnings-as-errors
+        run: mix compile --force
         working-directory: .
   build_dev:
     name: Build Dev
@@ -66,7 +67,8 @@ jobs:
         run: mix deps.get
         working-directory: .
       - name: Compile for dev
-        run: mix compile --force --warnings-as-errors
+        # run: mix compile --force --warnings-as-errors
+        run: mix compile --force
         working-directory: .
   test:
     name: Test
@@ -106,7 +108,8 @@ jobs:
           path: _build
           key: ${{ runner.os }}-test-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Run tests
-        run: mix test --color --warnings-as-errors
+        # run: mix test --color --warnings-as-errors
+        run: mix test --color
         working-directory: .
   credo_and_dialyxir:
     name: Credo + Dialyxir

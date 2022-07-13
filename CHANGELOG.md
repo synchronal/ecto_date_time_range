@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.99.0
+
+- Deprecate `Ecto.UTCDateTimeRange` and `Ecto.UTCTimeRange`.
+- Add `Ecto.DateTimeRange.UTCDateTime` type.
+
+This release represents the last `0.x` version.
+
 ## 0.4.0
 
 - Add `Ecto.DateTimeRange.Time` type, representing a naive time range.
