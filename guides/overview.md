@@ -35,6 +35,10 @@ defmodule Core.Repo.Migrations.AddThings do
     create table(:things) do
       add :performed_during, :tstzrange
     end
+
+    create table(:thing_schedules) do
+      add :performed_every, :tsrange
+    end
   end
 end
 ```
@@ -49,10 +53,28 @@ defmodule Core.Thing do
   import Ecto.Changeset
 
   schema "things" do
-    field :performed_during, Ecto.UTCDateTimeRange
+    field :performed_during, Ecto.DateTimeRange.UTCDateTime
   end
 
   @required_attrs ~w[performed_during]a
+  def changeset(data \\ %__MODULE__{}, attrs) do
+    data
+    |> cast(attrs, @required_attrs)
+    |> validate_required(@required_attrs)
+  end
+end
+```
+
+```elixir
+defmodule Core.ThingSchedule do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "thing_scheduless" do
+    field :performed_every, Ecto.DateTimeRange.Time
+  end
+
+  @required_attrs ~w[performed_every]a
   def changeset(data \\ %__MODULE__{}, attrs) do
     data
     |> cast(attrs, @required_attrs)

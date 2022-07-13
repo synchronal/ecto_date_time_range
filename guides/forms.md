@@ -35,34 +35,6 @@ defmodule Web.Components do
     """
   end
 
-  def utc_time_range_field(assigns) do
-  ~H"""
-  <fieldset id={@field}>
-    <div is="grouped">
-      <%= error_tag @f, @field %>
-      <input
-        type="time"
-        name={"#{form_name(@f)}[#{@field}][start_at]"}
-        value={utc_time_part(@f, @field, :start_at)}
-        id={"#{form_name(@f)}_#{@field}_start_at"}
-      />
-      <input
-        type="time"
-        name={"#{form_name(@f)}[#{@field}][end_at]"}
-        value={utc_time_part(@f, @field, :end_at)}
-        id={"#{form_name(@f)}_#{@field}_end_at"}
-      />
-      <input
-        type="hidden"
-        name={"#{form_name(@f)}[#{@field}][tz]"}
-        value="America/Los_Angeles"
-        id={"#{form_name(@f)}_#{@field}_tz"}
-      />
-    </div>
-  </fieldset>
-  """
-  end
-
   def time_range_field(assigns) do
   ~H"""
   <fieldset id={@field}>
@@ -92,18 +64,8 @@ defmodule Web.Components do
     |> Ecto.Changeset.get_field(field)
     |> case do
       nil -> DateTime.utc_now()
-      %Ecto.UTCDateTimeRange{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
+      %Ecto.DateTimeRange.UTCDateTime{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
     end
-  end
-
-  defp utc_time_part(form, field, part) do
-    form.source
-    |> Ecto.Changeset.get_field(field)
-    |> case do
-      nil -> default_time(part)
-      %Ecto.UTCTimeRange{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
-    end
-    |> to_time_value()
   end
 
   defp time_part(form, field, part) do
@@ -121,12 +83,11 @@ defmodule Web.Components do
 
   defp to_time_value(%Time{} = time), do: Calendar.strftime(time, "%H:%M")
 
-  defp to_time_zone(%Time{} = time, tz), do: Time.add(time, tz_offset(tz), :second)
   defp to_time_zone(%DateTime{} = time, tz), do: DateTime.add(time, tz_offset(tz), :second)
 
   defp tz_offset(tz) do
     {:ok, %{std_offset: _, utc_offset: offset, zone_abbr: _}} =
-      Calendar.get_time_zone_database().time_zone_periods_from_wall_datetime(NaiveDateTime.utc_now(), tz)
+      Calendar.get_time_zone_database().time_zone_periods_from_wall_datetime(DateTime.utc_now(), tz)
 
     offset
   end
@@ -170,7 +131,7 @@ end
 
 When this form is sent to the server via `POST` or in a LiveView's `phx-change` or `phx-submit`, the
 params will arrive in the following format, which matches that expected by
-`Ecto.UTCDateTimeRange.cast/1`:
+`Ecto.DateTimeRange.UTCDateTime.cast/1`:
 
 ```elixir
 %{

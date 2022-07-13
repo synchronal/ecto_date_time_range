@@ -24,7 +24,7 @@ defmodule Core.Repo.Migrations.AddThings do
   def change do
     create table(:things) do
       add :profile_id, references(:profiles), null: false
-      add :performed_during, :tsrange
+      add :performed_every, :tsrange
     end
   end
 end
