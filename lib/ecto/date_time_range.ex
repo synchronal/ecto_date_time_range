@@ -17,6 +17,9 @@ defmodule Ecto.DateTimeRange do
   iex> ~t(2020-02-02T00:01:00Z..2020-02-02T00:01:01Z)
   %Ecto.UTCDateTimeRange{start_at: ~U[2020-02-02T00:01:00Z], end_at: ~U[2020-02-02T00:01:01Z]}
   ...>
+  iex> ~t(2020-02-02T00:01:00Z..2020-02-02T00:01:01Z)u
+  %Ecto.DateTimeRange.UTCDateTime{start_at: ~U[2020-02-02T00:01:00Z], end_at: ~U[2020-02-02T00:01:01Z]}
+  ...>
   iex> ~t(hi there)
   ** (ArgumentError) Unable to parse DateTime(s) from input
   ...>
@@ -31,6 +34,13 @@ defmodule Ecto.DateTimeRange do
 
   def sigil_t(string, [?U]) when is_binary(string) do
     case Ecto.UTCDateTimeRange.parse(string) do
+      {:ok, range} -> range
+      {:error, error} -> raise ArgumentError, error
+    end
+  end
+
+  def sigil_t(string, [?u]) when is_binary(string) do
+    case Ecto.DateTimeRange.UTCDateTime.parse(string) do
       {:ok, range} -> range
       {:error, error} -> raise ArgumentError, error
     end
