@@ -1,5 +1,9 @@
 import Config
 
+if config_env() == :dev do
+  config :elixir, :time_zone_database, Tz.TimeZoneDatabase
+end
+
 if config_env() == :test do
   config :ecto, Test.Repo,
     url: "ecto://postgres@localhost/ecto_date_time_range_test",

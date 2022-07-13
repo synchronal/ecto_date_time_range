@@ -188,5 +188,19 @@ defmodule Ecto.DateTimeRange.TimeTest do
 
     test "with midnight inside cross-day range",
       do: assert(Ecto.DateTimeRange.Time.contains?(~t[23:00:00..02:00:00]T, ~T[00:00:00]))
+
+    test "with naive_date_time inside range",
+      do: assert(Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T01:59:59]))
+
+    test "with naive_date_time before range",
+      do: refute(Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T00:00:00]))
+
+    test "with naive_date_time after range",
+      do: refute(Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T03:00:00]))
+
+    test "with naive_date_time at start",
+      do: assert(Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T01:00:00]))
+
+    test "with naive_date_time at end", do: refute(Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T02:00:00]))
   end
 end

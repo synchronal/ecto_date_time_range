@@ -40,7 +40,8 @@ defmodule Ecto.DateTimeRange.Time do
 
   @doc """
   Returns true or false depending on whether the time is falls within the
-  specified range.
+  specified range. **Note:** this assumes that the range is in the same time zone as
+  whatever time or date time it is compared against.
 
   ## Example
 
@@ -55,9 +56,19 @@ defmodule Ecto.DateTimeRange.Time do
   true
   iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~T[02:00:00])
   false
+  ...>
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T00:00:00])
+  false
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~N[2022-01-01T01:00:00])
+  true
+  ...>
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~U[2022-01-01T00:00:00Z])
+  false
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~U[2022-01-01T01:00:00Z])
+  true
   ```
   """
-  @spec contains?(t(), Time.t()) :: boolean()
+  @spec contains?(t(), DateTime.t() | NaiveDateTime.t() | Time.t()) :: boolean()
   def contains?(%__MODULE__{start_at: start_at, end_at: end_at}, %Time{} = time) do
     if Time.compare(start_at, end_at) == :lt do
       Time.compare(start_at, time) in [:eq, :lt] && Time.compare(end_at, time) == :gt
@@ -65,6 +76,12 @@ defmodule Ecto.DateTimeRange.Time do
       Time.compare(start_at, time) in [:eq, :lt] || Time.compare(end_at, time) == :gt
     end
   end
+
+  def contains?(%__MODULE__{} = range, %DateTime{} = date_time),
+    do: contains?(range, DateTime.to_time(date_time))
+
+  def contains?(%__MODULE__{} = range, %NaiveDateTime{} = date_time),
+    do: contains?(range, NaiveDateTime.to_time(date_time))
 
   @doc """
   Create an `Ecto.DateTimeRange.Time` from two ISO8601 strings.
