@@ -3,8 +3,7 @@ defmodule Ecto.DateTimeRangeTest do
   @moduledoc false
   use Test.DataCase, async: true
 
-  alias Ecto.UTCDateTimeRange
-  alias Ecto.UTCTimeRange
+  alias Ecto.DateTimeRange
 
   doctest Ecto.DateTimeRange
 
@@ -13,29 +12,21 @@ defmodule Ecto.DateTimeRangeTest do
 
     test "creates a date time range from two ISO8601 timestamps" do
       ~t{2020-02-02T00:01:00Z..2020-02-02T00:01:01Z}
-      |> assert_eq(%UTCDateTimeRange{
+      |> assert_eq(%DateTimeRange.UTCDateTime{
         start_at: ~U[2020-02-02 00:01:00Z],
         end_at: ~U[2020-02-02 00:01:01Z]
       })
 
-      ~t{2020-02-02T00:01:00Z..2020-02-02T00:01:01Z}U
-      |> assert_eq(%UTCDateTimeRange{
+      ~t{2020-02-02T00:01:00Z..2020-02-02T00:01:01Z}u
+      |> assert_eq(%DateTimeRange.UTCDateTime{
         start_at: ~U[2020-02-02 00:01:00Z],
         end_at: ~U[2020-02-02 00:01:01Z]
-      })
-    end
-
-    test "creates a UTC time range from two ISO8601 timestamps" do
-      ~t{00:01:00Z..00:01:01Z}T
-      |> assert_eq(%UTCTimeRange{
-        start_at: ~T[00:01:00Z],
-        end_at: ~T[00:01:01Z]
       })
     end
 
     test "creates a time range from two ISO8601 timestamps" do
       ~t{00:01:00..00:01:01}t
-      |> assert_eq(%Ecto.DateTimeRange.Time{
+      |> assert_eq(%DateTimeRange.Time{
         start_at: ~T[00:01:00],
         end_at: ~T[00:01:01]
       })

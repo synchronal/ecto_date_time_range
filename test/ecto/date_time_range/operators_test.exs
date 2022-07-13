@@ -5,7 +5,7 @@ defmodule Ecto.DateTimeRange.OperatorsTest do
   import Ecto.DateTimeRange.Operators
   import Ecto.Query
   import Ecto.DateTimeRange, only: [sigil_t: 2]
-  alias Ecto.UTCDateTimeRange
+  alias Ecto.DateTimeRange
 
   doctest Ecto.DateTimeRange.Operators
 
@@ -24,7 +24,7 @@ defmodule Ecto.DateTimeRange.OperatorsTest do
     use Ecto.Schema
 
     schema "things_with_time_ranges_temp" do
-      field(:during, UTCDateTimeRange)
+      field(:during, DateTimeRange.UTCDateTime)
       field(:tid, :string)
     end
 
