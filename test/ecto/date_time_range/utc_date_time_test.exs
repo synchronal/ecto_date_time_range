@@ -175,18 +175,18 @@ defmodule Ecto.DateTimeRange.UTCDateTimeTest do
     import Ecto.DateTimeRange
 
     test "with time inside range",
-      do: assert(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]u, ~U[2022-01-01T01:59:59Z]))
+      do: assert(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]U, ~U[2022-01-01T01:59:59Z]))
 
     test "with time before range",
-      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]u, ~U[2022-01-01T00:00:00Z]))
+      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]U, ~U[2022-01-01T00:00:00Z]))
 
     test "with time after range",
-      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]u, ~U[2022-01-01T03:00:00Z]))
+      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]U, ~U[2022-01-01T03:00:00Z]))
 
     test "with time at start",
-      do: assert(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]u, ~U[2022-01-01T01:00:00Z]))
+      do: assert(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]U, ~U[2022-01-01T01:00:00Z]))
 
     test "with time at end",
-      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]u, ~U[2022-01-01T02:00:00Z]))
+      do: refute(Ecto.DateTimeRange.UTCDateTime.contains?(~t[2022-01-01T01:00:00Z..2022-01-01T02:00:00Z]U, ~U[2022-01-01T02:00:00Z]))
   end
 end

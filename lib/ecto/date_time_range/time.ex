@@ -47,13 +47,13 @@ defmodule Ecto.DateTimeRange.Time do
   ```
   iex> import Ecto.DateTimeRange
   ...>
-  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]t, ~T[00:00:00])
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~T[00:00:00])
   false
-  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]t, ~T[01:00:00])
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~T[01:00:00])
   true
-  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]t, ~T[01:59:59])
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~T[01:59:59])
   true
-  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]t, ~T[02:00:00])
+  iex> Ecto.DateTimeRange.Time.contains?(~t[01:00:00..02:00:00]T, ~T[02:00:00])
   false
   ```
   """

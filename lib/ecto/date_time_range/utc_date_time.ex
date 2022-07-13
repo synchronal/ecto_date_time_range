@@ -44,7 +44,7 @@ defmodule Ecto.DateTimeRange.UTCDateTime do
 
   ```
   iex> import Ecto.DateTimeRange
-  iex> range = ~t[2020-01-01T01:00:00Z..2020-01-02T01:00:00Z]u
+  iex> range = ~t[2020-01-01T01:00:00Z..2020-01-02T01:00:00Z]U
   ...>
   iex> Ecto.DateTimeRange.UTCDateTime.contains?(range, ~U[2020-01-01T00:59:59Z])
   false

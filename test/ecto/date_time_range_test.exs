@@ -17,7 +17,7 @@ defmodule Ecto.DateTimeRangeTest do
         end_at: ~U[2020-02-02 00:01:01Z]
       })
 
-      ~t{2020-02-02T00:01:00Z..2020-02-02T00:01:01Z}u
+      ~t{2020-02-02T00:01:00Z..2020-02-02T00:01:01Z}U
       |> assert_eq(%DateTimeRange.UTCDateTime{
         start_at: ~U[2020-02-02 00:01:00Z],
         end_at: ~U[2020-02-02 00:01:01Z]
@@ -25,7 +25,7 @@ defmodule Ecto.DateTimeRangeTest do
     end
 
     test "creates a time range from two ISO8601 timestamps" do
-      ~t{00:01:00..00:01:01}t
+      ~t{00:01:00..00:01:01}T
       |> assert_eq(%DateTimeRange.Time{
         start_at: ~T[00:01:00],
         end_at: ~T[00:01:01]
