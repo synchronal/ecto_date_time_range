@@ -1,5 +1,7 @@
 # Change Log
 
+## 0.4.0
+
 - Add `Ecto.DateTimeRange.Time` type, representing a naive time range.
 
 ## 0.3.1
