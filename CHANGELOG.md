@@ -1,5 +1,7 @@
 # Change Log
 
+- Add `Ecto.DateTimeRange.Time` type, representing a naive time range.
+
 ## 0.3.1
 
 - Fix `Ecto.UTCTimeRange.contains?/2` to handle ranges crossing day barrier.

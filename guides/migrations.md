@@ -1,6 +1,6 @@
 # Migrations
 
-`DateTime` ranges can be indicated in migrations with the `:tstzrange` column type.
+`Ecto.UTCDateTime` ranges can be indicated in migrations with the `:tstzrange` column type.
 
 ```elixir
 defmodule Core.Repo.Migrations.AddThings do
@@ -14,6 +14,23 @@ defmodule Core.Repo.Migrations.AddThings do
   end
 end
 ```
+
+`Ecto.DateTime.Time` ranges can be indicated in migrations with the `:tsrange` column type.
+
+```elixir
+defmodule Core.Repo.Migrations.AddThings do
+  use Ecto.Migration
+
+  def change do
+    create table(:things) do
+      add :profile_id, references(:profiles), null: false
+      add :performed_during, :tsrange
+    end
+  end
+end
+```
+
+## Indexes
 
 `GIST` or `SP-GIST` indexes and constraints can include range operators:
 

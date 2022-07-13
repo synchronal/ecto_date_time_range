@@ -6,7 +6,7 @@ defmodule Ecto.UTCDateTimeRangeTest do
 
   doctest Ecto.UTCDateTimeRange
 
-  deftemptable :things_with_time_ranges do
+  deftemptable :things_with_utc_date_time_ranges do
     column(:during, :tstzrange)
     column(:tid, :string)
   end
@@ -20,7 +20,7 @@ defmodule Ecto.UTCDateTimeRangeTest do
     @moduledoc false
     use Ecto.Schema
 
-    schema "things_with_time_ranges_temp" do
+    schema "things_with_utc_date_time_ranges_temp" do
       field(:during, UTCDateTimeRange)
       field(:tid, :string)
     end

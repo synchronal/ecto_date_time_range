@@ -6,7 +6,7 @@ defmodule Ecto.UTCTimeRangeTest do
 
   doctest Ecto.UTCTimeRange
 
-  deftemptable :things_with_time_ranges do
+  deftemptable :things_with_utc_time_ranges do
     column(:during, :tstzrange)
     column(:tid, :string)
   end
@@ -20,7 +20,7 @@ defmodule Ecto.UTCTimeRangeTest do
     @moduledoc false
     use Ecto.Schema
 
-    schema "things_with_time_ranges_temp" do
+    schema "things_with_utc_time_ranges_temp" do
       field(:during, UTCTimeRange)
       field(:tid, :string)
     end
@@ -156,7 +156,7 @@ defmodule Ecto.UTCTimeRangeTest do
         end_at: ~T[00:01:01Z]
       })
 
-      {:ok, %{rows: [[_, during, _]]}} = Test.Repo.query("select * from things_with_time_ranges_temp")
+      {:ok, %{rows: [[_, during, _]]}} = Test.Repo.query("select * from things_with_utc_time_ranges_temp")
 
       during
       |> assert_eq(%Postgrex.Range{

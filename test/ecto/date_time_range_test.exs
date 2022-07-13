@@ -6,6 +6,8 @@ defmodule Ecto.DateTimeRangeTest do
   alias Ecto.UTCDateTimeRange
   alias Ecto.UTCTimeRange
 
+  doctest Ecto.DateTimeRange
+
   describe "sigil_t" do
     import Ecto.DateTimeRange, only: [sigil_t: 2]
 
@@ -23,11 +25,19 @@ defmodule Ecto.DateTimeRangeTest do
       })
     end
 
-    test "creates a time range from two ISO8601 timestamps" do
+    test "creates a UTC time range from two ISO8601 timestamps" do
       ~t{00:01:00Z..00:01:01Z}T
       |> assert_eq(%UTCTimeRange{
         start_at: ~T[00:01:00Z],
         end_at: ~T[00:01:01Z]
+      })
+    end
+
+    test "creates a time range from two ISO8601 timestamps" do
+      ~t{00:01:00..00:01:01}t
+      |> assert_eq(%Ecto.DateTimeRange.Time{
+        start_at: ~T[00:01:00],
+        end_at: ~T[00:01:01]
       })
     end
 

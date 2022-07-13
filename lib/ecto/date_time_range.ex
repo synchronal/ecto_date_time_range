@@ -22,6 +22,9 @@ defmodule Ecto.DateTimeRange do
   ...>
   iex> ~t(00:01:00Z..00:01:01Z)T
   %Ecto.UTCTimeRange{start_at: ~T[00:01:00Z], end_at: ~T[00:01:01Z]}
+  ...>
+  iex> ~t(00:01:00..00:01:01)t
+  %Ecto.DateTimeRange.Time{start_at: ~T[00:01:00], end_at: ~T[00:01:01]}
   ```
   """
   def sigil_t(string, []), do: sigil_t(string, [?U])
@@ -35,6 +38,13 @@ defmodule Ecto.DateTimeRange do
 
   def sigil_t(string, [?T]) when is_binary(string) do
     case Ecto.UTCTimeRange.parse(string) do
+      {:ok, range} -> range
+      {:error, error} -> raise ArgumentError, error
+    end
+  end
+
+  def sigil_t(string, [?t]) when is_binary(string) do
+    case Ecto.DateTimeRange.Time.parse(string) do
       {:ok, range} -> range
       {:error, error} -> raise ArgumentError, error
     end

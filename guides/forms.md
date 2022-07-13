@@ -63,6 +63,28 @@ defmodule Web.Components do
   """
   end
 
+  def time_range_field(assigns) do
+  ~H"""
+  <fieldset id={@field}>
+    <div is="grouped">
+      <%= error_tag @f, @field %>
+      <input
+        type="time"
+        name={"#{form_name(@f)}[#{@field}][start_at]"}
+        value={time_part(@f, @field, :start_at)}
+        id={"#{form_name(@f)}_#{@field}_start_at"}
+      />
+      <input
+        type="time"
+        name={"#{form_name(@f)}[#{@field}][end_at]"}
+        value={time_part(@f, @field, :end_at)}
+        id={"#{form_name(@f)}_#{@field}_end_at"}
+      />
+    </div>
+  </fieldset>
+  """
+  end
+
   defp form_name(form), do: form.name
 
   defp utc_date_time_part(form, field, part) do
@@ -80,6 +102,16 @@ defmodule Web.Components do
     |> case do
       nil -> default_time(part)
       %Ecto.UTCTimeRange{} = range -> Map.get(range, part) |> to_time_zone("America/Los_Angeles")
+    end
+    |> to_time_value()
+  end
+
+  defp time_part(form, field, part) do
+    form.source
+    |> Ecto.Changeset.get_field(field)
+    |> case do
+      nil -> default_time(part)
+      %Ecto.DateTimeRange.Time{} = range -> Map.get(range, part)
     end
     |> to_time_value()
   end
