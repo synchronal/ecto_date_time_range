@@ -1,5 +1,26 @@
 # Change Log
 
+## 1.0.0
+
+**Breaking Changes**
+
+- Remove `Ecto.UTCDateTimeRange` and `Ecto.UTCTimeRange`.
+- Changes `sigil_t`:
+  - Defaults to `Ecto.DateTimeRange.UTCDateTime`.
+  - Changes `U` modifier to return `Ecto.DateTimeRange.UTCDateTime`.
+  - Changes `T` modifier to return `Ecto.DateTimeRange.Time`.
+
+**Upgrading**
+
+1. Update to version `0.99.0`.
+1. Fix all deprecation warnings by switching code to use `Ecto.DateTimeRange.UTCDateTime` instead of
+  `Ecto.UTCDateTimeRange` and `Ecto.DateTimeRange.Time` instead of `Ecto.UTCTimeRange`. **Important:**
+  when using time ranges, `tz` is ignored when provided in form params, and no time zone casting is
+  applied. Any time zone logic must be applied in application code.
+1. Switch usage of `sigil_t` to use the `u` or `t` modifiers, specifying the new modules.
+1. Update to version `1.0.0`.
+1. Switch usage of `sigil_t` to use the `U` or `T` modifiers.
+
 ## 0.99.0
 
 - Deprecate `Ecto.UTCDateTimeRange` and `Ecto.UTCTimeRange`.
