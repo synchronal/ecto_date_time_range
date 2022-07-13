@@ -6,7 +6,7 @@
     "guides/**/*.md",
     "*.md"
   ],
-  line_length: 120,
+  line_length: 135,
   markdown: [line_length: 100],
   plugins: [MarkdownFormatter]
 ]
