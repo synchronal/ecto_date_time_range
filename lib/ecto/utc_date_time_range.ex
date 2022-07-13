@@ -5,6 +5,10 @@ defmodule Ecto.UTCDateTimeRange do
   An `Ecto.Type` wrapping a `:tstzrange` Postgres column. To the application, it appears as
   a struct with `:start_at` and `:end_at`, with `:utc_datetime` values.
 
+  > #### Deprecated {: .warning}
+  >
+  > This module is deprecated in favor of `Ecto.DateTimeRange.UTCDateTime`.
+
   ```
   defmodule Core.Thing do
     use Ecto.Schema
@@ -58,6 +62,7 @@ defmodule Ecto.UTCDateTimeRange do
   ```
   """
   @spec contains?(t(), DateTime.t()) :: boolean()
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime.contains?/2"
   def contains?(%__MODULE__{start_at: start_at, end_at: end_at}, %DateTime{} = time) do
     DateTime.compare(start_at, time) in [:eq, :lt] && DateTime.compare(end_at, time) == :gt
   end
@@ -76,6 +81,7 @@ defmodule Ecto.UTCDateTimeRange do
   ```
   """
   @spec parse(binary()) :: {:ok, t()} | {:error, term()}
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime.parse/1"
   def parse(string) when is_binary(string), do: string |> String.split("..") |> do_parse()
 
   defp do_parse([%DateTime{} = lower, %DateTime{} = upper]),
@@ -98,6 +104,7 @@ defmodule Ecto.UTCDateTimeRange do
   @impl Ecto.Type
   @doc section: :ecto_type
   @doc "Converts user-provided data (for example from a form) to the Elixir term."
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime instead of Ecto.UTCDateTimeRange"
   def cast(%{start_at: lower, end_at: upper, tz: tz}) do
     case apply_func({lower, upper}, &Ecto.Type.cast(:naive_datetime, &1)) do
       {:ok, {lower, upper}} ->
@@ -124,6 +131,7 @@ defmodule Ecto.UTCDateTimeRange do
   @impl Ecto.Type
   @doc section: :ecto_type
   @doc "Converts the Ecto native type to the Elixir term."
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime instead of Ecto.UTCDateTimeRange"
   def load(%Postgrex.Range{lower: lower, upper: upper}) do
     apply_func({lower, upper}, &Ecto.Type.load(:utc_datetime, &1))
     |> case do
@@ -140,6 +148,7 @@ defmodule Ecto.UTCDateTimeRange do
   @impl Ecto.Type
   @doc section: :ecto_type
   @doc "Converts the Elixir term to the Ecto native type."
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime instead of Ecto.UTCDateTimeRange"
   def dump(%__MODULE__{start_at: %DateTime{} = lower, end_at: %DateTime{} = upper}) do
     {:ok, %Postgrex.Range{lower: lower, upper: upper, upper_inclusive: false}}
   end
@@ -157,6 +166,7 @@ defmodule Ecto.UTCDateTimeRange do
   @impl Ecto.Type
   @doc section: :ecto_type
   @doc "Checks if two terms are equal."
+  @deprecated "Use Ecto.DateTimeRange.UTCDateTime instead of Ecto.UTCDateTimeRange"
   def equal?(%__MODULE__{start_at: lower1, end_at: upper1}, %__MODULE__{
         start_at: lower2,
         end_at: upper2
