@@ -24,7 +24,7 @@ defmodule EctoDateTimeRange.MixProject do
       preferred_cli_env: [credo: :test, dialyzer: :test],
       source_url: @scm_url,
       start_permanent: Mix.env() == :prod,
-      version: "1.0.0"
+      version: "1.1.0"
     ]
   end
 
