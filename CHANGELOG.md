@@ -1,5 +1,7 @@
 # Change Log
 
+- Add `Ecto.DateTimeRange.NaiveDateTime`.
+
 ## 1.1.0
 
 - `Ecto.DateTimeRange.Time.contains?/2` handles `DateTime` and `NaiveDateTime` values.
