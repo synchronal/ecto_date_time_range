@@ -1,5 +1,6 @@
 # Change Log
 
+- Documentation TOC organization.
 - Add `Ecto.DateTimeRange.NaiveDateTime`.
 
 ## 1.1.0

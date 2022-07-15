@@ -67,6 +67,10 @@ defmodule EctoDateTimeRange.MixProject do
       groups_for_functions: [
         "Ecto.Type Callbacks": &(&1[:section] == :ecto_type)
       ],
+      groups_for_modules: [
+        Types: [Ecto.DateTimeRange.UTCDateTime, Ecto.DateTimeRange.NaiveDateTime, Ecto.DateTimeRange.Time],
+        Query: [Ecto.DateTimeRange.Operators]
+      ],
       main: "overview",
       source_ref: "main"
     ]
