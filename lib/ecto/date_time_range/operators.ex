@@ -15,6 +15,15 @@ defmodule Ecto.DateTimeRange.Operators do
   ```
   """
 
+  @doc """
+  Filter by rows where the given datetime falls within the range.
+
+  ## Examples
+
+  ```
+  from(thing in Thing, where: contains(thing.during_utc, ^DateTime.utc_now()))
+  ```
+  """
   defmacro contains(field, datetime) do
     quote do:
             fragment(
