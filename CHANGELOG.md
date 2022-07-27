@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.1
+
+- Relax version matching of `tz` when present.
+
 ## 1.2.0
 
 - Documentation TOC organization.

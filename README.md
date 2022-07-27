@@ -7,7 +7,7 @@ An `Ecto.Type` for utilizing `tstzrange` fields in Postgres.
 ```elixir
 def deps do
   [
-    {:ecto_date_time_range, "~> 0.1"}
+    {:ecto_date_time_range, "~> 0.2"}
   ]
 end
 ```
