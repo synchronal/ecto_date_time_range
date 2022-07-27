@@ -44,7 +44,7 @@ defmodule EctoDateTimeRange.MixProject do
       {:markdown_formatter, "~> 0.3", only: :dev, runtime: false},
       {:mix_audit, "~> 1.0", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0"},
-      {:tz, "~> 0.20.1", optional: true}
+      {:tz, "~> 0.20", optional: true}
     ]
 
   defp dialyzer,
