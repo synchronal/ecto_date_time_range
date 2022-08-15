@@ -10,7 +10,7 @@ on:
       - main
 env:
   ELIXIR_VERSION: "1.13.4"
-  OTP_VERSION: "25.0.2"
+  OTP_VERSION: "25.0.3"
 jobs:
   build_test:
     name: Build Test
@@ -76,7 +76,7 @@ jobs:
       MIX_ENV: test
     services:
       postgres:
-        image: postgres:14.3-alpine
+        image: postgres:14.5-alpine
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
