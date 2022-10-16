@@ -18,7 +18,7 @@ jobs:
     env:
       MIX_ENV: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -26,12 +26,12 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-test-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-test-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
@@ -47,7 +47,7 @@ jobs:
     env:
       MIX_ENV: dev
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -55,12 +55,12 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-dev-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-dev-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
@@ -91,7 +91,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -99,12 +99,12 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-test-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-test-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
@@ -118,7 +118,7 @@ jobs:
     env:
       MIX_ENV: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         id: beam
         uses: erlef/setup-beam@v1
@@ -127,17 +127,17 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-test-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-test-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache PLTs
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: priv/plts
           key: ${{ runner.os }}-test-dialyxir-v1-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ hashFiles('**/mix.lock', '.tool-versions') }}
@@ -154,7 +154,7 @@ jobs:
     env:
       MIX_ENV: dev
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -162,12 +162,12 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-dev-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-dev-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
@@ -189,7 +189,7 @@ jobs:
       - audit
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -197,17 +197,17 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           version-type: strict
       - name: Cache deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-dev-deps-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Cache _build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: ${{ runner.os }}-dev-build-v1-${{ hashFiles('**/mix.lock', '.tool-versions') }}
       - name: Publish to Hex
-        uses: synchronal/hex-publish-action@v1
+        uses: synchronal/hex-publish-action@v3
         with:
           name: ecto_date_time_range
           key: ${{ secrets.HEX_PM_KEY }}
