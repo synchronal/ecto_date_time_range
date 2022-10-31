@@ -6,7 +6,7 @@ defmodule Ecto.DateTimeRange.NaiveDateTimeTest do
 
   doctest Ecto.DateTimeRange.NaiveDateTime
 
-  deftemptable :things_with_naive_date_time_ranges do
+  deftemptable :things_with_naive_date_time_ranges_temp do
     column(:during, :tsrange)
     column(:tid, :string)
   end

@@ -6,7 +6,7 @@ defmodule Ecto.DateTimeRange.UTCDateTimeTest do
 
   doctest Ecto.DateTimeRange.UTCDateTime
 
-  deftemptable :things_with_utc_date_time_ranges do
+  deftemptable :things_with_utc_date_time_ranges_temp do
     column(:during, :tstzrange)
     column(:tid, :string)
   end

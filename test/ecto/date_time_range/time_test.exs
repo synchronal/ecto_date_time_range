@@ -6,7 +6,7 @@ defmodule Ecto.DateTimeRange.TimeTest do
 
   doctest Ecto.DateTimeRange.Time
 
-  deftemptable :things_with_time_ranges do
+  deftemptable :things_with_time_ranges_temp do
     column(:during, :tsrange)
     column(:tid, :string)
   end

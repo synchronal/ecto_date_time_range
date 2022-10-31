@@ -9,7 +9,7 @@ defmodule Ecto.DateTimeRange.OperatorsTest do
 
   doctest Ecto.DateTimeRange.Operators
 
-  deftemptable :things_with_ranges do
+  deftemptable :things_with_ranges_temp do
     column(:during_utc, :tstzrange)
     column(:during_naive, :tsrange)
     column(:tid, :string)

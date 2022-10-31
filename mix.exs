@@ -39,7 +39,7 @@ defmodule EctoDateTimeRange.MixProject do
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:ecto, ">= 3.0.0"},
       {:ecto_sql, "> 3.0.0"},
-      {:ecto_temp, "~> 0.1", only: :test},
+      {:ecto_temp, "~> 1.0", only: :test},
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:markdown_formatter, "~> 0.3", only: :dev, runtime: false},
       {:mix_audit, "~> 2.0", only: :dev, runtime: false},
