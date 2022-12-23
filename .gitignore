@@ -7,6 +7,7 @@
 /deps/
 /doc/
 /priv/plts/
+/priv/postgres/
 /tmp/
 ecto_date_time_range-*.tar
 erl_crash.dump

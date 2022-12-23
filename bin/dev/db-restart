@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bin/dev/db-stop -q && echo && bin/dev/db-start

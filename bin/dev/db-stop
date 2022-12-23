@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# Stops postgres using pg_ctl.
+#
+# Pass '-q' option if you don't want it to complain when it thinks postgres is not running.
+
+source ".medic/_support/cecho.sh"
+source ".medic/_support/confirm.sh"
+source ".medic/_support/step.sh"
+
+pgdir="$(pwd)/priv/postgres"
+datadir="${pgdir}/data"
+quiet=$1
+
+postgres_commands() {
+  ps -x -o command | grep '[/]bin/postgres' | sed 's/bin\/postgres/bin\/pg_ctl/'
+}
+
+postgres_running() {
+  test -n "$(postgres_commands)"
+}
+
+stop_local_postgres() {
+  if ps -x -o command | grep '[/]bin/postgres -D' | grep "${datadir}" >/dev/null; then
+    step "Stopping local postgres" "$(ps -x -o command | grep '[/]bin/postgres -D' | grep "${datadir}" | sed 's/bin\/postgres/bin\/pg_ctl/') stop"
+  else
+    if [[ $quiet != "-q" ]]; then
+      step_header "Stopping local postgres" ""
+      cecho --bright-bold-red "Postgres does not seem to be running locally"
+    fi
+  fi
+}
+
+stop_all_postgres() {
+  running=$(postgres_commands)
+  oIFS="$IFS"; IFS=$'\n'
+  for cmd in ${running}; do
+    directory="tmp"
+    step "Stopping non-local postgres" "${cmd} stop"
+  done
+  IFS="$oIFS"
+}
+
+main() {
+  stop_local_postgres
+
+  if [[ $SHLVL -gt 3 || $BASH_SUBSHELL -gt 0 ]]; then
+    stop_all_postgres
+  elif postgres_running; then
+    confirm "Stop all running postgres processes?"
+    stop_all_postgres
+  fi
+}
+
+main
