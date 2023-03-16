@@ -15,7 +15,8 @@ if config_env() == :test do
     hostname: "localhost",
     database: "postgres",
     pool: Ecto.Adapters.SQL.Sandbox,
-    pool_size: 10
+    pool_size: 10,
+    port: String.to_integer(System.get_env("PGPORT", "5432"))
 
   config :ecto_date_time_range,
     ecto_repos: [Test.Repo]

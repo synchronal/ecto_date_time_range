@@ -1,7 +1,8 @@
 *.ez
-.medic/.doctor.out
-.medic/skipped
 /.fetch
+/.local
+/.medic/.doctor.out
+/.medic/skipped
 /_build/
 /cover/
 /deps/
