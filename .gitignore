@@ -10,5 +10,6 @@
 /priv/plts/
 /priv/postgres/
 /tmp/
+Brewfile.lock.json
 ecto_date_time_range-*.tar
 erl_crash.dump

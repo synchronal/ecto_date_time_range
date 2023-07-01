@@ -22,3 +22,12 @@ https://hexdocs.pm/ecto_date_time_range/
 ## Alternatives you might like
 
 - [pg_ranges](https://hex.pm/packages/pg_ranges)
+
+## Development
+
+```shell
+brew bundle
+bin/dev/doctor
+bin/dev/test
+bin/dev/shipit
+```
