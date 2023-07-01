@@ -2,6 +2,7 @@ defmodule EctoDateTimeRange.MixProject do
   use Mix.Project
 
   @scm_url "https://github.com/synchronal/ecto_date_time_range"
+  @version "1.2.2"
 
   def application,
     do: [
@@ -24,7 +25,7 @@ defmodule EctoDateTimeRange.MixProject do
       preferred_cli_env: [credo: :test, dialyzer: :test],
       source_url: @scm_url,
       start_permanent: Mix.env() == :prod,
-      version: "1.2.1"
+      version: @version
     ]
   end
 

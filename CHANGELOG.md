@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.2
+
+- Updated dependencies.
+
 ## 1.2.1
 
 - Relax version matching of `tz` when present.
