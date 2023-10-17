@@ -7,9 +7,9 @@
 #
 # This may not be the script for you if you like to run postgres some other way.
 
-source ".medic/_support/cecho.sh"
-source ".medic/_support/step.sh"
-source ".medic/_support/check.sh"
+source "$(brew --prefix)/share/medic-bash/cecho.bash"
+source "$(brew --prefix)/share/medic-bash/step.bash"
+source "$(brew --prefix)/share/medic-bash/check.bash"
 
 set -e
 
