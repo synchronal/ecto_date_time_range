@@ -2,12 +2,12 @@
 
 checks = [
   { check = "homebrew" },
-  { check = "asdf", command = "plugin-installed", args = { plugin = "erlang" } },
-  { check = "asdf", command = "plugin-installed", args = { plugin = "elixir" } },
-  { check = "asdf", command = "plugin-installed", args = { plugin = "postgres" } },
-  { check = "asdf", command = "package-installed", args = { plugin = "erlang" } },
-  { check = "asdf", command = "package-installed", args = { plugin = "elixir" } },
-  { check = "asdf", command = "package-installed", args = { plugin = "postgres" } },
+  { check = "tool-versions", command = "plugin-installed", args = { plugin = "erlang" } },
+  { check = "tool-versions", command = "plugin-installed", args = { plugin = "elixir" } },
+  { check = "tool-versions", command = "plugin-installed", args = { plugin = "postgres" } },
+  { check = "tool-versions", command = "package-installed", args = { plugin = "erlang" } },
+  { check = "tool-versions", command = "package-installed", args = { plugin = "elixir" } },
+  { check = "tool-versions", command = "package-installed", args = { plugin = "postgres" } },
   { check = "postgres", command = "running", args = { user = "${USER}"} },
   { check = "postgres", command = "role-exists", args = { role = "postgres", user = "${USER}" } },
   { check = "postgres", command = "data-directory", args = { data-directory = "./priv/postgres/data" } },
