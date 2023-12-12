@@ -112,7 +112,12 @@ defmodule Ecto.DateTimeRange.UTCDateTime do
   end
 
   def cast(%{start_at: lower, end_at: upper}),
-    do: cast(%{start_at: lower, end_at: upper, tz: "Etc/UTC"})
+    do:
+      cast(%{
+        start_at: DateTime.shift_zone!(lower, "Etc/UTC"),
+        end_at: DateTime.shift_zone!(upper, "Etc/UTC"),
+        tz: "Etc/UTC"
+      })
 
   def cast(%{"start_at" => "", "end_at" => ""}), do: {:ok, nil}
 
