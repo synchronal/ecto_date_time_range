@@ -99,6 +99,18 @@ defmodule Ecto.DateTimeRange.UTCDateTime do
   @impl Ecto.Type
   @doc section: :ecto_type
   @doc "Converts user-provided data (for example from a form) to the Elixir term."
+
+  def cast(%{start_at: lower_iso8601, end_at: upper_iso8601, tz: tz})
+      when is_binary(lower) and is_binary(upper) do
+    with {:ok, lower, _} <- DateTime.from_iso8601(lower_iso8601),
+         {:ok, upper, _} <- DateTime.from_iso8601(upper_iso8601) do
+      cast(%{start_at: lower, end_at: upper, tz: tz})
+    else
+      _ ->
+        {:error, message: "unable to read start and/or end times"}
+    end
+  end
+
   def cast(%{start_at: lower, end_at: upper, tz: tz}) do
     case apply_func({lower, upper}, &Ecto.Type.cast(:naive_datetime, &1)) do
       {:ok, {lower, upper}} ->
