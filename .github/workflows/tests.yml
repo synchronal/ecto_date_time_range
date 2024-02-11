@@ -124,7 +124,7 @@ jobs:
       MIX_ENV: test
     services:
       postgres:
-        image: postgres:16.2-alpine
+        image: postgres:16.1-alpine
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
