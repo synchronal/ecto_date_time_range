@@ -9,7 +9,7 @@ This library is tested against the most recent 3 versions of Elixir and Erlang.
 ```elixir
 def deps do
   [
-    {:ecto_date_time_range, "~> 0.2"}
+    {:ecto_date_time_range, "~> 1.3"}
   ]
 end
 ```
