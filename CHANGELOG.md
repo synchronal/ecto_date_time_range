@@ -1,5 +1,8 @@
 # Change Log
 
+- require Elixir 1.15 or greater
+- test against the latest version of Erlang and Elixir
+
 ## 1.2.2
 
 - Updated dependencies.
