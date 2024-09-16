@@ -1,5 +1,4 @@
 [doctor]
-
 checks = [
   { check = "homebrew" },
   { check = "tool-versions", command = "plugin-installed", args = { plugin = "erlang" } },
@@ -17,14 +16,12 @@ checks = [
 ]
 
 [test]
-
 checks = [
   { name = "Check for warnings", shell = "mix compile --force --warnings-as-errors" },
   { name = "Elixir tests", shell = "mix test --color --warnings-as-errors --include external:true", verbose = true },
 ]
 
 [audit]
-
 checks = [
   { name = "Check formatting", shell = "bin/dev/format --check", remedy = "bin/dev/format --all" },
   { step = "elixir", command = "audit-deps" },
@@ -33,8 +30,12 @@ checks = [
   { check = "elixir", command = "unused-deps" },
 ]
 
-[update]
+[outdated]
+checks = [
+  { check = "elixir" },
+]
 
+[update]
 steps = [
   { step = "git", command = "pull" },
   { step = "elixir", command = "get-deps" },
@@ -45,7 +46,6 @@ steps = [
 ]
 
 [shipit]
-
 steps = [
   { audit = {} },
   { update = {} },
