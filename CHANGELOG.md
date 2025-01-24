@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Test against Elixir 1.18.
+- **Breaking change:** Drop support for Elixir 1.15.
+
 ## 1.3.0
 
 - require Elixir 1.15 or greater
