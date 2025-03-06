@@ -63,7 +63,7 @@ defmodule EctoDateTimeRange.MixProject do
         "guides/migrations.md",
         "guides/forms.md",
         "CHANGELOG.md",
-        "LICENSE.md"
+        "LICENSE.txt"
       ],
       groups_for_functions: [
         "Ecto.Type Callbacks": &(&1[:section] == :ecto_type)
