@@ -91,7 +91,8 @@ defmodule EctoDateTimeRange.MixProject do
       licenses: ["Apache-2.0"],
       links: %{
         "GitHub" => @scm_url,
-        "Change Log" => "https://hexdocs.pm/ecto_date_time_range/changelog.html"
+        "Change Log" => "https://hexdocs.pm/ecto_date_time_range/changelog.html",
+        "Sponsor" => "https://github.com/sponsors/reflective-dev"
       },
       maintainers: ["synchronal.dev", "Erik Hanson", "Eric Saxby"]
     ]
