@@ -52,7 +52,8 @@ defmodule EctoDateTimeRange.MixProject do
     do: [
       plt_add_apps: [:ex_unit, :inets, :mix],
       plt_add_deps: :app_tree,
-      plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      plt_core_path: "_build/plts/#{Mix.env()}",
+      plt_local_path: "_build/plts/#{Mix.env()}"
     ]
 
   defp docs,
