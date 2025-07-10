@@ -145,4 +145,44 @@ defmodule Ecto.DateTimeRange.NaiveDateTimeTest do
     test "with time at end",
       do: refute(Ecto.DateTimeRange.NaiveDateTime.contains?(~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N, ~N[2022-01-01T02:00:00]))
   end
+
+  describe "equal?" do
+    import Ecto.DateTimeRange
+
+    test "with same start and end times",
+      do:
+        assert(
+          Ecto.DateTimeRange.NaiveDateTime.equal?(
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N,
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N
+          )
+        )
+
+    test "with different start times",
+      do:
+        refute(
+          Ecto.DateTimeRange.NaiveDateTime.equal?(
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N,
+            ~t[2022-01-01T01:00:01..2022-01-01T02:00:00]N
+          )
+        )
+
+    test "with different end times",
+      do:
+        refute(
+          Ecto.DateTimeRange.NaiveDateTime.equal?(
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N,
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:01]N
+          )
+        )
+
+    test "with different start and end times",
+      do:
+        refute(
+          Ecto.DateTimeRange.NaiveDateTime.equal?(
+            ~t[2022-01-01T01:00:00..2022-01-01T02:00:00]N,
+            ~t[2022-01-01T01:00:01..2022-01-01T02:00:01]N
+          )
+        )
+  end
 end

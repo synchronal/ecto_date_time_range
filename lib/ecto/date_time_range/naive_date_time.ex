@@ -147,7 +147,7 @@ defmodule Ecto.DateTimeRange.NaiveDateTime do
         start_at: lower2,
         end_at: upper2
       }),
-      do: DateTime.compare(lower1, lower2) == :eq && DateTime.compare(upper1, upper2) == :eq
+      do: NaiveDateTime.compare(lower1, lower2) == :eq && NaiveDateTime.compare(upper1, upper2) == :eq
 
   def equal?(first, second), do: first == second
 
