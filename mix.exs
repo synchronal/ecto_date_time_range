@@ -2,7 +2,7 @@ defmodule EctoDateTimeRange.MixProject do
   use Mix.Project
 
   @scm_url "https://github.com/synchronal/ecto_date_time_range"
-  @version "2.0.0"
+  @version "2.0.1"
 
   def application,
     do: [
