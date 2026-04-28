@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 2.0.2
+
+- Update deps.
+
+## 2.0.1
+
+- Fix `NaiveDateTime.equal?` implementation to use NaiveDateTime instead of DateTiem.
+
 ## 2.0.0
 
 - Test against Elixir 1.18.
