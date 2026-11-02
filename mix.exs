@@ -46,7 +46,7 @@ defmodule EctoDateTimeRange.MixProject do
       {:ecto_sql, "> 3.0.0"},
       {:ecto_temp, "~> 2.0", only: :test},
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
-      {:markdown_formatter, "~> 1.0", only: :dev, runtime: false},
+      {:markdown_formatter, "~> 2.0", only: :dev, runtime: false},
       {:mix_audit, "~> 2.0", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0"},
       {:tz, "~> 0.20", optional: true}

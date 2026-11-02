@@ -1,8 +1,7 @@
 # Ecto DateTime Ranges
 
 [![CI](https://github.com/synchronal/ecto_date_time_range/actions/workflows/tests.yml/badge.svg)](https://github.com/synchronal/ecto_date_time_range/actions)
-[![Hex
-pm](http://img.shields.io/hexpm/v/ecto_date_time_range.svg?style=flat)](https://hex.pm/packages/ecto_date_time_range)
+[![Hex pm](http://img.shields.io/hexpm/v/ecto_date_time_range.svg?style=flat)](https://hex.pm/packages/ecto_date_time_range)
 
 An `Ecto.Type` for utilizing `tstzrange` fields in Postgres.
 
